@@ -11,6 +11,14 @@ const SummaryBox = ({ todalTotal, yesterdayTotal }) => {
             <p>
                 <strong>📊 Today:</strong> {todalTotal} kcal
             </p>
+
+            <p>
+                <strong>📆 Yesterday:</strong> {new Date().toDateString()}
+            </p>
+            <p>
+                <strong>📊 Yesterday:</strong> {yesterdayTotal} kcal
+            </p>
+
             {compare !== null && (
                 <p>
                     🔁 Compared to yesterday:{' '}
