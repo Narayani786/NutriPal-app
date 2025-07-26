@@ -1,0 +1,15 @@
+:root {
+    --font-family: 'Poppins', sans-serif;
+
+    --primary: #4CAF50;
+    --primary-dark: #388E3C;
+    --secondary: #FFC107;
+
+    --background: #f5f7fa;
+    --card-bg: #ffffff;
+    --summary-bg: #e8f5e9;
+    --item-bg: #f1f8e9;
+
+    --text: #212121;
+    --border: #cfd8dc;
+}
