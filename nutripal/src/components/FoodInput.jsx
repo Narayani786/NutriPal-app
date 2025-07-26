@@ -13,7 +13,7 @@ const FoodInput = ({ onAdd }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='input-form'>
+        <form onSubmit={handleSubmit} className='input-item'>
             <input
             type='text'
             placeholder='Food'
