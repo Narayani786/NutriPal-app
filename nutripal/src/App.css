@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.App {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1, h3 {
+    color: var(--primary);
+    text-align: center;
+}
+
+input, button {
+    font-family: inherit;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--primary-dark);
+}
+
+.food-list {
+    margin-top: 20px;
+}
+
+.food-item {
+    background: var(--item-bg);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-box {
+    margin-top: 24px;
+    padding: 16px;
+    border-radius: 10px;
+    background: var(--summary-bg);
+    font-weight: bold;
+    text-align: center;
+}
