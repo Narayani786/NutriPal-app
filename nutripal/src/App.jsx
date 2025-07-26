@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+
 import './App.css';
+import './styles/theme.css';
+
 import FoodInput from './components/FoodInput';
 import FoodList from './components/FoodList';
 import TotalCalories from './components/TotalCalories';
