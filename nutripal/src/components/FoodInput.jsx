@@ -15,6 +15,11 @@ const FoodInput = ({ onAdd }) => {
         onAdd(newFood);
         setFood('');
         setCalories('');
+
+        setMessage('Food Added!');
+        setTimeout(() => {
+            setMessage('');
+        }, 2000);
     };
 
     return (

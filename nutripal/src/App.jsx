@@ -14,38 +14,40 @@ import { saveFoodToLocalStorage,
 } from './utils/storageUtils';
 
     const App = () => {
-        const [foodList, setFoodList] = useState([]);
-        const [yesterdayTotal, setYesterdayTotal] = useState(null);
+
+        // generate date string
+        const today = new Date().toISOString().split('T')[0];
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+
+        // state for today's food list
+        const [foodList, setFoodList] = useState(() => {
+            const saved = localStorage.getItem(today);
+            return saved ? JSON.parse(saved) : [];
+        });
+
+        // state for yesterday's food list
+        const [yesterdayList, setYesterdayList] = useState(() => {
+            const saved = localStorage.getItem(yesterday);
+            return saved ? JSON.parse(saved) : [];
+        });
 
         useEffect(() => {
-            const allData = JSON.parse( localStorage.getItem('nutripals') || '{}' );
-            const todayData = allData[getTodayKey()] || [];
-            setFoodList(todayData);
-
-            setYesterdayTotal(getYesterdayTotal());
-        }, []);
-
-        useEffect(() => {
-            saveFoodToLocalStorage(foodList);
-        }, [foodList]);
-
+            localStorage.setItem(today, JSON.stringify(foodList));
+        }, [foodList, today]);
 
         const handleAdd = (item) => {
-            setFoodList([...foodList, item]);
+            setFoodList((prev) => [...prev, item]);
         };
 
-        const handleDelete = (indexToRemove) => {
-            const updatedList = foodList.filter((_, index) => index !== indexToRemove);
-            setFoodList(updatedList);
-        }
-
-        const totalToday = foodList.reduce( (acc, item) => acc + item.calories, 0 );
+        const handleDelete = (food) => {
+            setFoodList((prev) => prev.filter((item) => item.food !== food));
+        };
 
         return (
             <div className='App'>
                 <h1>🥗NutriPal</h1>
                 <FoodInput onAdd={handleAdd} />
-                <FoodList foodList={foodList} />
+                <FoodList foodList={foodList} setFoodList={setFoodList}/>
                 <TotalCalories foodList={foodList} />
                 <SummaryBox todalTotal={totalToday} yesterdayTotal={yesterdayTotal} />
             </div>

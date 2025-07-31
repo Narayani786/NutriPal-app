@@ -1,4 +1,5 @@
 import React from 'react';
+import {getTodayKey} from '../utils/storageUtils';
 
 const FoodList = ({ foodList, setFoodList }) => {
 
@@ -6,8 +7,7 @@ const FoodList = ({ foodList, setFoodList }) => {
         const updateList = foodList.filter(item => item.id !== id);
         setFoodList(updateList);
 
-        const today = new Date().toISOString().split('T')[0];
-        localStorage.setItem(today, JSON.stringify(updateList));
+        localStorage.setItem(getTodayKey(), JSON.stringify(updateList));
     };
 
     return (
@@ -18,7 +18,7 @@ const FoodList = ({ foodList, setFoodList }) => {
         ) : (
             foodList.map(item => (
                 <div key={item.id} className='food-item'>
-                    <span>{item.name} - {item.calories} cal</span>
+                    <span>{item.food} - {item.calories} cal</span>
                     <button className='delete-btn' onClick={() => handleDelete(item.id)}>✕</button>
                 </div >
             ))
