@@ -34,6 +34,11 @@ import { saveFoodToLocalStorage,
             setFoodList([...foodList, item]);
         };
 
+        const handleDelete = (indexToRemove) => {
+            const updatedList = foodList.filter((_, index) => index !== indexToRemove);
+            setFoodList(updatedList);
+        }
+
         const totalToday = foodList.reduce( (acc, item) => acc + item.calories, 0 );
 
         return (

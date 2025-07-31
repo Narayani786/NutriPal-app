@@ -7,7 +7,12 @@ const FoodInput = ({ onAdd }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!food || !calories) return;
-        onAdd({ name: food, calories: Number(calories) });
+
+        const newFood = {
+            food,
+            calories: parseInt(calories),
+        };
+        onAdd(newFood);
         setFood('');
         setCalories('');
     };
