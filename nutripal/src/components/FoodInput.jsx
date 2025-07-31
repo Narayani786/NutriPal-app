@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getToday } from '../utils/storageUtils';
 
 const FoodInput = ({ onAdd }) => {
     const [food, setFood] = useState('');
@@ -9,6 +10,7 @@ const FoodInput = ({ onAdd }) => {
         if(!food || !calories) return;
 
         const newFood = {
+            id:crypto.randomUUID(),
             food,
             calories: parseInt(calories),
         };
@@ -16,10 +18,6 @@ const FoodInput = ({ onAdd }) => {
         setFood('');
         setCalories('');
 
-        setMessage('Food Added!');
-        setTimeout(() => {
-            setMessage('');
-        }, 2000);
     };
 
     return (

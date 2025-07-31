@@ -1,5 +1,5 @@
 import React from 'react';
-import {getTodayKey} from '../utils/storageUtils';
+import {getToday} from '../utils/storageUtils';
 
 const FoodList = ({ foodList, setFoodList }) => {
 
@@ -7,7 +7,7 @@ const FoodList = ({ foodList, setFoodList }) => {
         const updateList = foodList.filter(item => item.id !== id);
         setFoodList(updateList);
 
-        localStorage.setItem(getTodayKey(), JSON.stringify(updateList));
+        localStorage.setItem(getToday(), JSON.stringify(updateList));
     };
 
     return (

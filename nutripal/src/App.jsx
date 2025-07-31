@@ -8,25 +8,19 @@ import FoodList from './components/FoodList';
 import TotalCalories from './components/TotalCalories';
 import SummaryBox from './components/SummaryBox';
 
-import { saveFoodToLocalStorage,
-         getTodayKey,
-         getYesterdayTotal 
-} from './utils/storageUtils';
+import { getToday, getYesterday } from './utils/storageUtils';
 
     const App = () => {
 
-        // generate date string
-        const today = new Date().toISOString().split('T')[0];
-        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+        const today = getToday();
+        const yesterday = getYesterday();
 
-        // state for today's food list
         const [foodList, setFoodList] = useState(() => {
             const saved = localStorage.getItem(today);
             return saved ? JSON.parse(saved) : [];
         });
 
-        // state for yesterday's food list
-        const [yesterdayList, setYesterdayList] = useState(() => {
+        const [yesterdayTotal, setYesterdayTotal] = useState(() => {
             const saved = localStorage.getItem(yesterday);
             return saved ? JSON.parse(saved) : [];
         });
@@ -36,22 +30,25 @@ import { saveFoodToLocalStorage,
         }, [foodList, today]);
 
         const handleAdd = (item) => {
-            setFoodList((prev) => [...prev, item]);
-        };
-
-        const handleDelete = (food) => {
-            setFoodList((prev) => prev.filter((item) => item.food !== food));
-        };
-
-        return (
-            <div className='App'>
-                <h1>🥗NutriPal</h1>
-                <FoodInput onAdd={handleAdd} />
-                <FoodList foodList={foodList} setFoodList={setFoodList}/>
-                <TotalCalories foodList={foodList} />
-                <SummaryBox todalTotal={totalToday} yesterdayTotal={yesterdayTotal} />
-            </div>
+            setFoodList((prev) => [...prev, item]
         );
     };
+
+    const handleDelete = (foodName) => {
+        setFoodList((prev) => prev.filter((item) => item.food !== foodName));
+    };
+
+    const totalToday = foodList.reduce((acc, item) => acc + Number(item.cal), 0);
+
+    return (
+        <div className='App'>
+            <h1>🥗NutriPal</h1>
+            <FoodInput onAdd={handleAdd}/>
+            <FoodList foodList={foodList} setFoodList={setFoodList} onDelete={handleDelete}/>
+            <TotalCalories foodList={foodList}/>
+            <SummaryBox totalToday={totalToday} yesterdayTotal={yesterdayTotal}/>
+        </div>
+    );
+};
 
 export default App;
