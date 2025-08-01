@@ -16,12 +16,13 @@ const FoodList = ({ foodList, setFoodList }) => {
         {foodList.length === 0 ? (
             <p>No food added yet today.</p>
         ) : (
-            foodList.map(item => (
+            foodList.map((item) => {
+                console.log('Item', item);
                 <div key={item.id} className='food-item'>
                     <span>{item.food} - {item.calories} cal</span>
                     <button className='delete-btn' onClick={() => handleDelete(item.id)}>✕</button>
                 </div >
-            ))
+})
         )}
        </div>
     );
